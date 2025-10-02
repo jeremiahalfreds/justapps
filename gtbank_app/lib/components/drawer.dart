@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gtbank_app/screens/dashboard.dart';
 import 'package:gtbank_app/screens/messages.dart';
-import 'package:gtbank_app/screens/norifications.dart';
+import 'package:gtbank_app/screens/notifications.dart';
 import 'package:gtbank_app/screens/settings.dart';
 
 class DrawerBuilder extends StatefulWidget {

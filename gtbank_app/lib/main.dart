@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gtbank_app/components/login.dart';
 import 'package:gtbank_app/screens/dashboard.dart';
 import 'package:gtbank_app/screens/messages.dart';
-import 'package:gtbank_app/screens/norifications.dart';
+import 'package:gtbank_app/screens/notifications.dart';
+import 'package:gtbank_app/screens/profile.dart';
 import 'package:gtbank_app/screens/settings.dart';
-import 'components/drawer.dart';
+
+// import 'components/drawer.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,11 +18,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: '/login', // ✅ Start with login screen
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const MainPage(),
+      },
       theme: ThemeData(
         fontFamily: "Ubuntu",
         useMaterial3: true,
         brightness: Brightness.light,
         primarySwatch: Colors.grey,
+
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
@@ -69,6 +78,11 @@ class _MainPageState extends State<MainPage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
+            // const DrawerHeader(
+            //   curve: Curves.fastOutSlowIn,
+            //   decoration: BoxDecoration(color: Colors.blue),
+            //   child: Text("Testing header"),
+            // ),
             const UserAccountsDrawerHeader(
               accountName: Text("Naruto Uzumaki"),
               accountEmail: Text("naruto@konoha.com"),
@@ -131,7 +145,7 @@ class _MainPageState extends State<MainPage> {
               title: const Text("Logout"),
               onTap: () {
                 Navigator.pop(context);
-                // Handle logout logic
+                Navigator.pushReplacementNamed(context, '/login');
               },
             ),
           ],
@@ -144,10 +158,43 @@ class _MainPageState extends State<MainPage> {
           _titles[_currentIndex],
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+
+        // leading
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
+
+        // actions
         actions: [
           IconButton(
+              icon: const Icon(Icons.chat_bubble_outline),
+              // onPressed: (){
+              //   Navigator.push<void>(
+              //     context,
+              //     MaterialPageRoute<void>(
+              //       builder: (BuildContext context) => const ProfilePage(),
+              //     ),
+              //   );
+              // }
+            onPressed: () => setState(() => _currentIndex = 2),
+          ),
+          IconButton(
             icon: const Icon(Icons.person_outline),
-            onPressed: () => setState(() => _currentIndex = 3),
+            onPressed: (){
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const ProfilePage(),
+                ),
+              );
+            }
+            // onPressed: () => setState(() => _currentIndex = 4),
           ),
         ],
       ),
@@ -164,14 +211,17 @@ class _MainPageState extends State<MainPage> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home_outlined), label: "Home"),
           NavigationDestination(
-            icon: Icon(Icons.notifications_none),
-            label: "Notifications",
+            icon: Icon(Icons.task_alt_outlined),
+            label: "Tasks",
           ),
           NavigationDestination(
             icon: Icon(Icons.message_outlined),
             label: "Messages",
           ),
-          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+          NavigationDestination(
+            icon: Icon(Icons.settings_sharp),
+            label: "Settings",
+          ),
         ],
       ),
     );
