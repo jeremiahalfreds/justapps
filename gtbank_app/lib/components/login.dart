@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gtbank_app/components/register.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+
+  static Widget _socialButton(IconData? icon, Color color, String label) {
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      ),
+      onPressed: () {},
+      // icon: Icon(icon),
+      label: Text(label),
+    );
+  }
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +56,22 @@ class LoginScreen extends StatelessWidget {
 
                 // Password
                 TextField(
-                  obscureText: true,
+                  obscureText: _obscurePassword,
                   decoration: InputDecoration(
                     hintText: "Password",
                     prefixIcon: const Icon(Icons.lock),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -110,7 +140,7 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: _socialButton(
+                      child: LoginScreen._socialButton(
                         Icons.g_mobiledata,
                         Colors.red,
                         "Google",
@@ -118,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _socialButton(
+                      child: LoginScreen._socialButton(
                         Icons.facebook,
                         Colors.blue,
                         "Facebook",
@@ -126,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _socialButton(
+                      child: LoginScreen._socialButton(
                         Icons.alternate_email,
                         Colors.black,
                         "Twitter",
@@ -139,21 +169,6 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  // Helper widget for social buttons
-  static Widget _socialButton(IconData? icon, Color color, String label) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      ),
-      onPressed: () {},
-      // icon: Icon(icon),
-      label: Text(label),
     );
   }
 }
