@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart'; // For date formatting
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -33,6 +34,24 @@ class _ProfilePageState extends State<ProfilePage> {
     // clear after dispose
     myController.dispose();
     super.dispose();
+  }
+
+  final TextEditingController _dateController = TextEditingController();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      setState(() {
+        _dateController.text = formattedDate;
+      });
+    }
   }
 
   @override
@@ -130,6 +149,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 labelText: 'Phone Number',
                 prefixIcon: Icon(Icons.phone),
               ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _dateController,
+              decoration: InputDecoration(
+                labelText: 'Date of Birth',
+                suffixIcon: Icon(Icons.calendar_today),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              readOnly: true, // user cannot type manually
+              onTap: () => _selectDate(context), // open date picker on tap
             ),
             const SizedBox(height: 12),
             TextField(

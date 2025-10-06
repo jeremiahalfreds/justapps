@@ -82,9 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           : Icons.visibility_outlined,
                     ),
                     onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
+                      setState(() => _obscurePassword = !_obscurePassword);
                     },
                   ),
                 ),
@@ -102,9 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           : Icons.visibility_outlined,
                     ),
                     onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
+                      setState(() => _obscurePassword = !_obscurePassword);
                     },
                   ),
                 ),
@@ -116,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     gradient: const LinearGradient(
-                      colors: [Colors.purple, Colors.blue],
+                      colors: [Colors.deepOrangeAccent, Colors.blue],
                     ),
                   ),
                   child: ElevatedButton(

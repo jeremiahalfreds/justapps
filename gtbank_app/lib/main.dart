@@ -5,6 +5,7 @@ import 'package:gtbank_app/screens/messages.dart';
 import 'package:gtbank_app/screens/notifications.dart';
 import 'package:gtbank_app/screens/profile.dart';
 import 'package:gtbank_app/screens/settings.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 // import 'components/drawer.dart';
 
@@ -23,20 +24,44 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const MainPage(),
       },
-      theme: ThemeData(
-        fontFamily: "Ubuntu",
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primarySwatch: Colors.grey,
 
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          toolbarHeight: 140.0,
-          elevation: 0.0,
-        ),
-      ),
+      // ********** Use this command for interactive theme mode (light or dark)
+      // The Mandy red, light theme.
+      theme:
+          FlexThemeData.light(
+            scheme: FlexScheme.mandyRed,
+            fontFamily: "Ubuntu",
+            useMaterial3: true,
+          ).copyWith(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              centerTitle: true,
+              toolbarHeight: 140.0,
+              elevation: 0.0,
+            ),
+            scaffoldBackgroundColor: Colors.white,
+            brightness: Brightness.dark,
+          ),
+      // The Mandy red, dark theme.
+      darkTheme:
+          FlexThemeData.dark(
+            scheme: FlexScheme.mandyRed,
+            fontFamily: "Ubuntu",
+            useMaterial3: true,
+          ).copyWith(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+              toolbarHeight: 140.0,
+              elevation: 0.0,
+            ),
+            scaffoldBackgroundColor: Colors.black,
+            brightness: Brightness.dark,
+          ),
+      // Use dark or light theme based on system setting.
+      themeMode: ThemeMode.system,
+
+      // ********** Use this command for interactive theme mode (light or dark)
       home: MainPage(),
     );
   }
@@ -173,27 +198,27 @@ class _MainPageState extends State<MainPage> {
         // actions
         actions: [
           IconButton(
-              icon: const Icon(Icons.chat_bubble_outline),
-              // onPressed: (){
-              //   Navigator.push<void>(
-              //     context,
-              //     MaterialPageRoute<void>(
-              //       builder: (BuildContext context) => const ProfilePage(),
-              //     ),
-              //   );
-              // }
+            icon: const Icon(Icons.chat_bubble_outline),
+            // onPressed: (){
+            //   Navigator.push<void>(
+            //     context,
+            //     MaterialPageRoute<void>(
+            //       builder: (BuildContext context) => const ProfilePage(),
+            //     ),
+            //   );
+            // }
             onPressed: () => setState(() => _currentIndex = 2),
           ),
           IconButton(
             icon: const Icon(Icons.person_outline),
-            onPressed: (){
+            onPressed: () {
               Navigator.push<void>(
                 context,
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) => const ProfilePage(),
                 ),
               );
-            }
+            },
             // onPressed: () => setState(() => _currentIndex = 4),
           ),
         ],
