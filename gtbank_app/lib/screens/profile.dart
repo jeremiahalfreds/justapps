@@ -15,7 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   File? _profileImage;
   final myController = TextEditingController(); // input func
   String? name;
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
 
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(
@@ -434,9 +434,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
       
 >>>>>>> Stashed changes
-                  child: const Text(
+                  child: Text(
                     "Update Profile",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style = TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ),
