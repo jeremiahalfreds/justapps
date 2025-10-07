@@ -13,24 +13,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   File? _profileImage;
-
-  //text input
   final myController = TextEditingController(); // input func
-  final passController = TextEditingController(); // input func
-  final nameController = TextEditingController(); // input func
-  final usernameController = TextEditingController(); // input func
-  final emailController = TextEditingController(); // input func
-  final phoneController = TextEditingController(); // input func
-  final addressController = TextEditingController(); // input func
-
   String? name;
-  String? username;
-  String? email;
-  String? phone;
-  String? dob;
-  String? address;
-  String? password;
-
   bool _obscurePassword = true;
 
   Future<void> _pickImage() async {
@@ -50,12 +34,6 @@ class _ProfilePageState extends State<ProfilePage> {
   void dispose() {
     // clear after dispose
     myController.dispose();
-    passController.dispose();
-    nameController.dispose();
-    usernameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
-    addressController.dispose();
     super.dispose();
   }
 
@@ -79,6 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return Scaffold(
       // AppBar
       appBar: AppBar(
@@ -91,6 +70,10 @@ class _ProfilePageState extends State<ProfilePage> {
       // body
       body: SafeArea(
         child: SingleChildScrollView(
+=======
+    return SafeArea(
+      child: SingleChildScrollView(
+>>>>>>> Stashed changes
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -140,7 +123,11 @@ class _ProfilePageState extends State<ProfilePage> {
               TextField(
                 controller: myController,
                 onChanged: (value) => name = value,
+<<<<<<< Updated upstream
                 textCapitalization: TextCapitalization.sentences,
+=======
+                textCapitalization: TextCapitalization.words,
+>>>>>>> Stashed changes
                 decoration: InputDecoration(
                   hintText: "Jeremiah F. Alfred",
                   border: OutlineInputBorder(
@@ -157,6 +144,135 @@ class _ProfilePageState extends State<ProfilePage> {
                   hintText: "jeremiah.alfred",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+<<<<<<< Updated upstream
+=======
+                  ),
+                  labelText: 'Username',
+                  prefixIcon: Icon(Icons.account_circle),
+                ),
+              ),
+              const SizedBox(height: 12),
+              // TextField(
+              //   keyboardType: TextInputType.phone,
+              //   decoration: InputDecoration(
+              //     hintText: "+231 770 000 000",
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(12),
+              //     ),
+              //     labelText: 'Phone Number',
+              //     prefixIcon: Icon(Icons.phone),
+              //   ),
+              // ),
+              IntlPhoneField(
+                languageCode: 'en',
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: "770 000 000",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  labelText: 'Phone Number',
+                  suffixIcon: Icon(Icons.phone),
+                ),
+                initialCountryCode: 'LR', // default country
+                onChanged: (phone) {
+                  print(phone.completeNumber); // e.g. +12025550123
+                },
+                onCountryChanged: (country) {
+                  print('Country changed to: ${country.name}');
+                },
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _dateController,
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth',
+                  suffixIcon: Icon(Icons.calendar_today),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                readOnly: true, // user cannot type manually
+                onTap: () => _selectDate(context), // open date picker on tap
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: "jeremiah.alfred@gtbank.com",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email),
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  labelText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Update Button
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  gradient: const LinearGradient(
+                    colors: [Colors.deepOrangeAccent, Colors.blue],
+                  ),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+>>>>>>> Stashed changes
                   ),
                   labelText: 'Username',
                   prefixIcon: Icon(Icons.account_circle),
@@ -288,6 +404,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   onPressed: () {
                     setState(() {
                       print(Text(myController.text));
+<<<<<<< Updated upstream
                       name = myController.text;
                       print(name);
                       username = usernameController.text;
@@ -298,13 +415,25 @@ class _ProfilePageState extends State<ProfilePage> {
                       password = passController.text;
                     });
 
+=======
+                    });
+      
+                    // ✅ Navigate to HomePage after login
+                    Navigator.pushReplacementNamed(context, '/home');
+      
+>>>>>>> Stashed changes
                     // TODO: Add save logic here
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Profile saved ✅")),
                     );
+<<<<<<< Updated upstream
                     // ✅ Navigate to HomePage after login
                     // Navigator.pushReplacementNamed(context, '/home');
                   },
+=======
+                  },
+      
+>>>>>>> Stashed changes
                   child: const Text(
                     "Update Profile",
                     style: TextStyle(fontSize: 18, color: Colors.white),
@@ -313,7 +442,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
+<<<<<<< Updated upstream
         ),
+=======
+>>>>>>> Stashed changes
       ),
     );
   }

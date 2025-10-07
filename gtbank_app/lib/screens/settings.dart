@@ -15,7 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: const EdgeInsets.all(15.0),
       children: [
         const Padding(
-          padding: EdgeInsets.symmetric(vertical: 0.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
             'Account Info',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),

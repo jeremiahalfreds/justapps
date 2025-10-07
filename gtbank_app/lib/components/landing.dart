@@ -47,9 +47,9 @@ class LandingPage extends StatelessWidget {
       headerBackgroundColor: Colors.white,
       pageBackgroundColor: Colors.white,
       background: [
-        Image.asset('images/slide_1.png', height: 450),
-        Image.asset('images/slide_2.png', height: 450),
-        Image.asset('images/slide_3.png', height: 450),
+        Image.asset('images/slide_1.png', height: 500),
+        Image.asset('images/slide_2.png', height: 500),
+        Image.asset('images/slide_3.png', height: 500),
       ],
       speed: 1.8,
       pageBodies: [
@@ -61,7 +61,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 480),
+              const SizedBox(height: 580),
               Text(
                 'On your way...',
                 textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 480),
+              const SizedBox(height: 580),
               Text(
                 'You’ve reached your destination.',
                 textAlign: TextAlign.center,
@@ -123,7 +123,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 480),
+              const SizedBox(height: 580),
               Text(
                 'Start now!',
                 textAlign: TextAlign.center,
@@ -147,50 +147,6 @@ class LandingPage extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-//
-class OnBoarding extends StatelessWidget {
-  const OnBoarding({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoApp(
-      home: OnBoardingSlider(
-        headerBackgroundColor: Colors.white,
-        finishButtonText: 'Register',
-        finishButtonStyle: FinishButtonStyle(backgroundColor: Colors.black),
-        skipTextButton: Text('Skip'),
-        trailing: Text('Login'),
-        background: [
-          Image.asset('assets/slide_1.png'),
-          Image.asset('assets/slide_2.png'),
-        ],
-        totalPage: 2,
-        speed: 1.8,
-        pageBodies: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 480),
-                Text('Description Text 1'),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 480),
-                Text('Description Text 2'),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
