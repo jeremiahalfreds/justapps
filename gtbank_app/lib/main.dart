@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtbank_app/components/landing.dart';
 import 'package:gtbank_app/components/login.dart';
 import 'package:gtbank_app/screens/dashboard.dart';
 import 'package:gtbank_app/screens/messages.dart';
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login', // ✅ Start with login screen
+      initialRoute: '/landing', // ✅ Start with login screen
       routes: {
+        '/landing': (context) => const LandingPage(),
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const MainPage(),
       },

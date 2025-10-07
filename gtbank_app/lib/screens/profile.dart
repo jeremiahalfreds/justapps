@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -116,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: myController,
               onChanged: (value) => name = value,
-              textCapitalization: TextCapitalization.sentences,
+              textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
                 hintText: "Jeremiah F. Alfred",
                 border: OutlineInputBorder(
@@ -139,16 +140,35 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 12),
-            TextField(
+            // TextField(
+            //   keyboardType: TextInputType.phone,
+            //   decoration: InputDecoration(
+            //     hintText: "+231 770 000 000",
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(12),
+            //     ),
+            //     labelText: 'Phone Number',
+            //     prefixIcon: Icon(Icons.phone),
+            //   ),
+            // ),
+            IntlPhoneField(
+              languageCode: 'en',
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
-                hintText: "+231 770 000 000",
+                hintText: "770 000 000",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 labelText: 'Phone Number',
-                prefixIcon: Icon(Icons.phone),
+                suffixIcon: Icon(Icons.phone),
               ),
+              initialCountryCode: 'LR', // default country
+              onChanged: (phone) {
+                print(phone.completeNumber); // e.g. +12025550123
+              },
+              onCountryChanged: (country) {
+                print('Country changed to: ${country.name}');
+              },
             ),
             const SizedBox(height: 12),
             TextField(
@@ -186,7 +206,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    _obscurePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -207,7 +229,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    _obscurePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
