@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: myController,
               onChanged: (value) => name = value,
-              textCapitalization: TextCapitalization.words,
+              textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 hintText: "Jeremiah F. Alfred",
                 border: OutlineInputBorder(
@@ -206,9 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -229,9 +227,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
