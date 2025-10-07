@@ -13,8 +13,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   File? _profileImage;
+
+  //text input
   final myController = TextEditingController(); // input func
+  final passController = TextEditingController(); // input func
+  final nameController = TextEditingController(); // input func
+  final usernameController = TextEditingController(); // input func
+  final emailController = TextEditingController(); // input func
+  final phoneController = TextEditingController(); // input func
+  final addressController = TextEditingController(); // input func
+
   String? name;
+  String? username;
+  String? email;
+  String? phone;
+  String? dob;
+  String? address;
+  String? password;
+
   bool _obscurePassword = true;
 
   Future<void> _pickImage() async {
@@ -34,6 +50,12 @@ class _ProfilePageState extends State<ProfilePage> {
   void dispose() {
     // clear after dispose
     myController.dispose();
+    passController.dispose();
+    nameController.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
     super.dispose();
   }
 
@@ -117,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: myController,
               onChanged: (value) => name = value,
-              textCapitalization: TextCapitalization.words,
+              textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 hintText: "Jeremiah F. Alfred",
                 border: OutlineInputBorder(
@@ -206,9 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -229,9 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -242,42 +260,28 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 20),
-            // Update Button
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: const LinearGradient(
-                  colors: [Colors.deepOrangeAccent, Colors.blue],
+            ElevatedButton.icon(
+              onPressed: () {
+                setState(() {
+                  print(Text(myController.text));
+                });
+                // TODO: Add save logic here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Profile saved ✅")),
+                );
+              },
+              icon: const Icon(Icons.save, color: Colors.purple),
+              label: const Text(
+                "Save Profile",
+                style: TextStyle(
+                  color: Colors.purple,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                onPressed: () {
-                  setState(() {
-                    print(Text(myController.text));
-                  });
-
-                  // ✅ Navigate to HomePage after login
-                  Navigator.pushReplacementNamed(context, '/home');
-
-                  // TODO: Add save logic here
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Profile saved ✅")),
-                  );
-                },
-
-                child: const Text(
-                  "Update Profile",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
