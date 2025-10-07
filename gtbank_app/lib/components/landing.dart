@@ -47,9 +47,9 @@ class LandingPage extends StatelessWidget {
       headerBackgroundColor: Colors.white,
       pageBackgroundColor: Colors.white,
       background: [
-        Image.asset('images/slide_1.png', height: 500),
-        Image.asset('images/slide_2.png', height: 500),
-        Image.asset('images/slide_3.png', height: 500),
+        Image.asset('images/slide_1.png', height: 450),
+        Image.asset('images/slide_2.png', height: 450),
+        Image.asset('images/slide_3.png', height: 450),
       ],
       speed: 1.8,
       pageBodies: [
@@ -61,7 +61,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 480),
               Text(
                 'On your way...',
                 textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 480),
               Text(
                 'You’ve reached your destination.',
                 textAlign: TextAlign.center,
@@ -123,7 +123,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 480),
               Text(
                 'Start now!',
                 textAlign: TextAlign.center,
