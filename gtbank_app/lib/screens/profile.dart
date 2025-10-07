@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: myController,
               onChanged: (value) => name = value,
-              textCapitalization: TextCapitalization.sentences,
+              textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
                 hintText: "Jeremiah F. Alfred",
                 border: OutlineInputBorder(
@@ -206,7 +206,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    _obscurePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -227,7 +229,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    _obscurePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
@@ -238,28 +242,42 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                setState(() {
-                  print(Text(myController.text));
-                });
-                // TODO: Add save logic here
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Profile saved ✅")),
-                );
-              },
-              icon: const Icon(Icons.save, color: Colors.purple),
-              label: const Text(
-                "Save Profile",
-                style: TextStyle(
-                  color: Colors.purple,
-                  fontWeight: FontWeight.bold,
+            // Update Button
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: const LinearGradient(
+                  colors: [Colors.deepOrangeAccent, Colors.blue],
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                onPressed: () {
+                  setState(() {
+                    print(Text(myController.text));
+                  });
+
+                  // ✅ Navigate to HomePage after login
+                  Navigator.pushReplacementNamed(context, '/home');
+
+                  // TODO: Add save logic here
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Profile saved ✅")),
+                  );
+                },
+
+                child: const Text(
+                  "Update Profile",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ),
