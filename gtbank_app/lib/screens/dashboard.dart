@@ -1,106 +1,77 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 // Home page
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final List<Map<String, String>> animeList = [
+    {'title': 'Demon Slayer', 'image': 'images/j3.jpg'},
+    {'title': 'Attack on Titan', 'image': 'images/j5.png'},
+    {'title': 'Naruto', 'image': 'images/j4.avif'},
+    {'title': 'One Piece', 'image': 'images/j6.jpg'},
+    {'title': 'Jujutsu Kaisen', 'image': 'images/j2.jpg'},
+    {'title': 'Bleach', 'image': 'images/j1.avif'},
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // const Padding(
-          //   padding: EdgeInsets.symmetric(vertical: 0.0),
-          //   child: Text(
-          //     'Payment',
-          //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          // // Row of Action Cards
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(6.0),
-          //         child: ElevatedButton.icon(
-          //           style: ElevatedButton.styleFrom(
-          //             backgroundColor: Colors.grey.shade200, // light bg
-          //             foregroundColor: Colors.black, // text + icon color
-          //             shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(40), // pill shape
-          //             ),
-          //             padding: const EdgeInsets.symmetric(vertical: 10),
-          //           ),
-          //           onPressed: () {},
-          //           icon: const Icon(Icons.south_west), // ↙ icon
-          //           label: const Text("Receive"),
-          //         ),
-          //       ),
-          //     ),
-          //     const SizedBox(width: 12),
-          //     Expanded(
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(6.0),
-          //         child: ElevatedButton.icon(
-          //           style: ElevatedButton.styleFrom(
-          //             backgroundColor: Colors.teal, // dark bg
-          //             foregroundColor: Colors.white, // text + icon color
-          //             shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(40), // pill shape
-          //             ),
-          //             padding: const EdgeInsets.symmetric(vertical: 10),
-          //           ),
-          //           onPressed: () {},
-          //           icon: const Icon(Icons.north_east), // ↗ icon
-          //           label: const Text("Send"),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // const SizedBox(height: 20),
-          // const Padding(
-          //   padding: EdgeInsets.symmetric(vertical: 10.0),
-          //   child: Text(
-          //     'Transactions',
-          //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          // // Transactions Card
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(16),
-          //   ),
-          //   elevation: 2,
-          //   child: ListTile(
-          //     leading: const Icon(Icons.history, color: Colors.teal),
-          //     title: const Text("Recent Transactions"),
-          //     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          //     onTap: () {
-          //       // Navigate to transactions
-          //     },
-          //   ),
-          // ),
-          // const SizedBox(height: 12),
-          // Card(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(16),
-          //   ),
-          //   elevation: 2,
-          //   child: ListTile(
-          //     leading: const Icon(
-          //       Icons.account_balance_wallet,
-          //       color: Colors.deepPurple,
-          //     ),
-          //     title: const Text("My Wallets"),
-          //     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          //     onTap: () {
-          //       // Navigate to wallets
-          //     },
-          //   ),
-          // ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GridView.builder(
+        itemCount: animeList.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // number of columns
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 0.8, // width/height ratio
+        ),
+        itemBuilder: (context, index) {
+          final anime = animeList[index];
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                // Background Image
+                Image.asset(anime['image']!, fit: BoxFit.cover),
+      
+                // Blur overlay at bottom
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                        child: Container(
+                          height: 50,
+                          color: Colors.black.withOpacity(0.4),
+                          alignment: Alignment.center,
+                          child: Text(
+                            anime['title']!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black54,
+                                  blurRadius: 4,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

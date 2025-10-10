@@ -5,7 +5,7 @@ import 'package:gtbank_app/components/login.dart';
 import 'package:gtbank_app/components/register.dart';
 
 class LandingPage extends StatelessWidget {
-  final Color kDarkBlueColor = const Color(0xFF053149);
+  final Color kDarkBlueColor = const Color(0xFF304B63);
 
   const LandingPage({super.key});
 
@@ -23,17 +23,17 @@ class LandingPage extends StatelessWidget {
       skipTextButton: Text(
         'Skip',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 18,
           color: kDarkBlueColor,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.bold,
         ),
       ),
       trailing: Text(
         'Login',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 18,
           color: kDarkBlueColor,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.bold,
         ),
       ),
       trailingFunction: () {
@@ -47,9 +47,9 @@ class LandingPage extends StatelessWidget {
       headerBackgroundColor: Colors.white,
       pageBackgroundColor: Colors.white,
       background: [
-        Image.asset('images/slide_1.png', height: 500),
-        Image.asset('images/slide_2.png', height: 500),
-        Image.asset('images/slide_3.png', height: 500),
+        Image.asset('images/slide_1.png', height: 480),
+        Image.asset('images/slide_2.png', height: 480),
+        Image.asset('images/slide_3.png', height: 480),
       ],
       speed: 1.8,
       pageBodies: [
@@ -61,7 +61,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 560),
               Text(
                 'On your way...',
                 textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 560),
               Text(
                 'You’ve reached your destination.',
                 textAlign: TextAlign.center,
@@ -123,7 +123,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 580),
+              const SizedBox(height: 520),
               Text(
                 'Start now!',
                 textAlign: TextAlign.center,

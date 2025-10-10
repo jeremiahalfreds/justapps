@@ -40,7 +40,7 @@ class _DrawerBuilderState extends State<DrawerBuilder> {
               Navigator.push<void>(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const HomePage(),
+                  builder: (BuildContext context) => HomePage(),
                 ),
               );
             },
@@ -102,7 +102,7 @@ class _DrawerBuilderState extends State<DrawerBuilder> {
               Navigator.push<void>(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const HomePage(),
+                  builder: (BuildContext context) => HomePage(),
                 ),
               );
             },

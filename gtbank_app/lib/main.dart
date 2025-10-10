@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       // The Mandy red, light theme.
       theme:
           FlexThemeData.light(
-            scheme: FlexScheme.deepOrangeM3,
+            scheme: FlexScheme.sanJuanBlue,
             fontFamily: "Ubuntu",
             useMaterial3: true,
           ).copyWith(
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
               foregroundColor: Colors.black,
               centerTitle: true,
               toolbarHeight: 120.0,
-              // elevation: 4.0,
+              elevation: 20.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
@@ -52,22 +52,45 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            scaffoldBackgroundColor: Colors.white,
-            brightness: Brightness.dark,
+            //scaffoldBackgroundColor: Colors.white,
+            //brightness: Brightness.dark,
+            navigationBarTheme: NavigationBarThemeData(
+              iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+                (states) => IconThemeData(
+                  color: states.contains(WidgetState.selected)
+                      ? Colors
+                            .blue // selected icon color
+                      : Colors.black87, // unselected icon color
+                ),
+              ),
+              labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+                (states) => TextStyle(
+                  color: states.contains(WidgetState.selected)
+                      ? Colors
+                            .blue // selected text color
+                      : Colors.black87, // unselected text color
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              indicatorColor: Colors.transparent,
+              height: 100.0,
+              elevation: 20.0,
+              backgroundColor: Colors.grey.shade300, // customize as needed
+            ),
           ),
       // The Mandy red, dark theme.
       darkTheme:
           FlexThemeData.dark(
-            scheme: FlexScheme.deepOrangeM3,
+            scheme: FlexScheme.outerSpace,
             fontFamily: "Ubuntu",
             useMaterial3: true,
           ).copyWith(
             appBarTheme: AppBarTheme(
-              backgroundColor: Colors.grey.shade100,
-              foregroundColor: Colors.black,
+              //backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
               centerTitle: true,
               toolbarHeight: 120.0,
-              // elevation: 4,
+              elevation: 20.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
@@ -75,8 +98,31 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            scaffoldBackgroundColor: Colors.black,
-            brightness: Brightness.dark,
+            //scaffoldBackgroundColor: Colors.white70,
+            //brightness: Brightness.dark,
+            navigationBarTheme: NavigationBarThemeData(
+              iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+                (states) => IconThemeData(
+                  color: states.contains(WidgetState.selected)
+                      ? Colors
+                            .blue // selected icon color
+                      : Colors.white70, // unselected icon color
+                ),
+              ),
+              labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+                (states) => TextStyle(
+                  color: states.contains(WidgetState.selected)
+                      ? Colors
+                            .blue // selected text color
+                      : Colors.white70, // unselected text color
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              indicatorColor: Colors.transparent,
+              height: 100.0,
+              elevation: 20.0,
+              //backgroundColor: Colors.grey.shade100, // customize as needed
+            ),
           ),
       // Use dark or light theme based on system setting.
       themeMode: ThemeMode.system,
@@ -100,7 +146,7 @@ class _MainPageState extends State<MainPage> {
 
   // Pages for bottom navigation
   final List<Widget> _pages = [
-    const HomePage(),
+    HomePage(),
     const NotificationsPage(),
     const MessagesPage(),
     const SettingsPage(),
@@ -147,7 +193,10 @@ class _MainPageState extends State<MainPage> {
             ),
             ListTile(
               leading: const Icon(LucideIcons.bell500, size: 20.0),
-              title: const Text("Notifications", style: TextStyle(fontSize: 18)),
+              title: const Text(
+                "Notifications",
+                style: TextStyle(fontSize: 18),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 setState(() => _currentIndex = 1);
@@ -188,7 +237,11 @@ class _MainPageState extends State<MainPage> {
             // ),
             const Divider(),
             ListTile(
-              leading: const Icon(LucideIcons.logOut500, color: Colors.red, size: 20.0),
+              leading: const Icon(
+                LucideIcons.logOut500,
+                color: Colors.red,
+                size: 20.0,
+              ),
               title: const Text("Logout", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pop(context);
@@ -220,7 +273,10 @@ class _MainPageState extends State<MainPage> {
         // actions
         actions: [
           IconButton(
-            icon: const Icon(LucideIcons.messageCircle500),
+            icon: Badge.count(
+              count: 5,
+              child: const Icon(LucideIcons.messageCircle500),
+            ),
             // onPressed: (){
             //   Navigator.push<void>(
             //     context,
@@ -250,14 +306,6 @@ class _MainPageState extends State<MainPage> {
       // Body
       body: _pages[_currentIndex],
 
-      // floating action
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Colors.blue.withValues(alpha: 1.6),
-      //   onPressed: null,
-      //   child: Icon(LucideIcons.send500, size: 26.0),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-
       // nav bar
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(0.0), // optional margin from screen edge
@@ -267,58 +315,32 @@ class _MainPageState extends State<MainPage> {
             topRight: Radius.circular(30.0),
           ), // round corners
 
-          child: NavigationBarTheme(
-            data: NavigationBarThemeData(
-              indicatorColor: Colors.transparent,
-              labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
-                (states) => TextStyle(
-                  color: states.contains(WidgetState.selected)
-                      ? Colors
-                            .blue // selected text color
-                      : Colors.black87, // unselected text color
-                  fontWeight: FontWeight.w600,
-                ),
+          child: NavigationBar(
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (index) =>
+                setState(() => _currentIndex = index),
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(LucideIcons.house500, size: 26.0),
+                label: "Home",
               ),
-              iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
-                (states) => IconThemeData(
-                  color: states.contains(WidgetState.selected)
-                      ? Colors
-                            .blue // selected icon color
-                      : Colors.black87, // unselected icon color
-                ),
+              NavigationDestination(
+                icon: Icon(LucideIcons.circleCheckBig500, size: 26.0),
+                label: "Tasks",
               ),
-            ),
-
-            child: NavigationBar(
-              height: 90.0,
-              // elevation: 20.0,
-              backgroundColor: Colors.grey.shade100, // customize as needed
-              selectedIndex: _currentIndex,
-              onDestinationSelected: (index) =>
-                  setState(() => _currentIndex = index),
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(LucideIcons.house500, size: 26.0),
-                  label: "Home",
-                ),
-                NavigationDestination(
-                  icon: Icon(LucideIcons.circleCheckBig500, size: 26.0),
-                  label: "Tasks",
-                ),
-                NavigationDestination(
-                  icon: Icon(LucideIcons.messageCircle500, size: 26.0),
-                  label: "Messages",
-                ),
-                NavigationDestination(
-                  icon: Icon(LucideIcons.settings500, size: 26.0),
-                  label: "Settings",
-                ),
-                NavigationDestination(
-                  icon: Icon(LucideIcons.user500, size: 26.0),
-                  label: "Profile",
-                ),
-              ],
-            ),
+              NavigationDestination(
+                icon: Icon(LucideIcons.messageCircle500, size: 26.0),
+                label: "Messages",
+              ),
+              NavigationDestination(
+                icon: Icon(LucideIcons.settings500, size: 26.0),
+                label: "Settings",
+              ),
+              NavigationDestination(
+                icon: Icon(LucideIcons.user500, size: 26.0),
+                label: "Profile",
+              ),
+            ],
           ),
         ),
       ),
