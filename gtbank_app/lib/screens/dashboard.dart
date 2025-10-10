@@ -29,13 +29,13 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           final anime = animeList[index];
           return ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10.0),
             child: Stack(
               fit: StackFit.expand,
               children: [
                 // Background Image
                 Image.asset(anime['image']!, fit: BoxFit.cover),
-      
+
                 // Blur overlay at bottom
                 Positioned.fill(
                   child: Align(
