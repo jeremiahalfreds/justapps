@@ -10,8 +10,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-// import 'components/drawer.dart';
-
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
