@@ -160,6 +160,12 @@ class _MainPageState extends State<MainPage> {
     "Profile",
   ];
 
+  // Future<String> fetchUserName(String name) {
+  //   return Future.delayed(Duration(seconds: 2), () {
+  //     return name;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
